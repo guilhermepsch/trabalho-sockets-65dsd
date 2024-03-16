@@ -1,4 +1,4 @@
-package trabalho.client.commands.person;
+package trabalho.client.commands.pessoa;
 
 import trabalho.client.commands.AbstractRequestCommand;
 
@@ -7,16 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class CreatePersonCommand extends AbstractRequestCommand {
+public class PessoaGetCommand extends AbstractRequestCommand {
     @Override
     public void execute(Socket socket, PrintWriter writer, BufferedReader reader, BufferedReader userInputReader) throws IOException {
-        System.out.println("Enter CPF:");
+        System.out.println("Insira o CPF da pessoa para ler:");
         String cpf = userInputReader.readLine();
-        System.out.println("Enter Name:");
-        String name = userInputReader.readLine();
-        System.out.println("Enter Address:");
-        String address = userInputReader.readLine();
-        writer.println("CREATE_PERSON;" + cpf + ";" + name + ";" + address);
+        writer.println("GET_PESSOA;" + cpf);
         super.execute(socket, writer, reader, userInputReader);
     }
 }

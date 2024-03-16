@@ -3,11 +3,12 @@ package trabalho.client.cli;
 public class MainMenuCommandFactory extends MenuCommand {
 
     public MainMenuCommandFactory() {
-        this.addMenuItem("1", "Person", new PersonMenuCommandFactory());
+        this.addMenuItem("1", "Pessoa", new PessoaMenuCommandFactory());
+        this.addMenuItem("2", "Turma", new TurmaMenuCommandFactory());
     }
 
     @Override
     protected String getMenuTitle() {
-        return "Main Menu";
+        return "Menu Principal";
     }
 }

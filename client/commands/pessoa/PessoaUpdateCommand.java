@@ -1,4 +1,4 @@
-package trabalho.client.commands.person;
+package trabalho.client.commands.pessoa;
 
 import trabalho.client.commands.AbstractRequestCommand;
 
@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class UpdatePersonCommand extends AbstractRequestCommand {
+public class PessoaUpdateCommand extends AbstractRequestCommand {
     @Override
     public void execute(Socket socket, PrintWriter writer, BufferedReader reader, BufferedReader userInputReader) throws IOException {
-        System.out.println("Enter CPF of the person to update:");
+        System.out.println("Insira o CPF da pessoa a ser atualizada:");
         String cpf = userInputReader.readLine();
-        System.out.println("Enter updated name:");
+        System.out.println("Insira o novo nome:");
         String name = userInputReader.readLine();
-        System.out.println("Enter updated address:");
+        System.out.println("Insira o novo endereço:");
         String address = userInputReader.readLine();
-        writer.println("UPDATE_PERSON;" + cpf + ";" + name + ";" + address);
+        writer.println("UPDATE_PESSOA;" + cpf + ";" + name + ";" + address);
         super.execute(socket, writer, reader, userInputReader);
     }
 }

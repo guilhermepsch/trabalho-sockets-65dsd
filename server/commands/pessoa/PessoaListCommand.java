@@ -1,21 +1,22 @@
-package trabalho.server.commands;
+package trabalho.server.commands.pessoa;
 
-import trabalho.server.models.Person;
+import trabalho.server.commands.CrudCommand;
+import trabalho.server.models.Pessoa;
 import trabalho.server.repositories.Repository;
 import trabalho.server.services.ServiceLocator;
 
 import java.util.List;
 
-public class ListPersonCommand implements CrudCommand<Person> {
+public class PessoaListCommand implements CrudCommand<Pessoa> {
     @Override
     public String execute(String... args) throws Exception {
-        Repository<Person> repository = ServiceLocator.getRepository(Person.class);
-        List<Person> people = repository.listAll();
+        Repository<Pessoa> repository = ServiceLocator.getRepository(Pessoa.class);
+        List<Pessoa> people = repository.listAll();
         if (people.isEmpty()) {
-            return "No people found.";
+            return "Nenhuma pessoa encontrada.";
         }
         StringBuilder stringBuilder = new StringBuilder();
-        for (Person person : people) {
+        for (Pessoa person : people) {
             stringBuilder.append(person.toString()).append("\n");
         }
         return stringBuilder.toString();

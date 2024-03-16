@@ -1,4 +1,4 @@
-package trabalho.client.commands.person;
+package trabalho.client.commands.turma;
 
 import trabalho.client.commands.AbstractRequestCommand;
 
@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class GetPersonCommand extends AbstractRequestCommand {
+public class TurmaDeleteCommand extends AbstractRequestCommand {
     @Override
     public void execute(Socket socket, PrintWriter writer, BufferedReader reader, BufferedReader userInputReader) throws IOException {
-        System.out.println("Enter CPF of the person to retrieve:");
-        String cpf = userInputReader.readLine();
-        writer.println("GET_PERSON;" + cpf);
+        System.out.println("Enter materia of the turma to be deleted:");
+        String materia = userInputReader.readLine();
+        writer.println("DELETE_TURMA;" + materia);
         super.execute(socket, writer, reader, userInputReader);
     }
 }

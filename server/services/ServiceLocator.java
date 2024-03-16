@@ -1,8 +1,10 @@
 package trabalho.server.services;
 
-import trabalho.server.models.Person;
-import trabalho.server.repositories.PersonRepository;
+import trabalho.server.models.Pessoa;
+import trabalho.server.models.Turma;
+import trabalho.server.repositories.PessoaRepository;
 import trabalho.server.repositories.Repository;
+import trabalho.server.repositories.TurmaRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,8 @@ public class ServiceLocator {
     private ServiceLocator(){}
 
     static {
-        repositories.put(Person.class, new PersonRepository());
+        repositories.put(Pessoa.class, new PessoaRepository());
+        repositories.put(Turma.class, new TurmaRepository());
     }
 
     public static <T> Repository<T> getRepository(Class<T> clazz) {

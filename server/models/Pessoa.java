@@ -1,14 +1,14 @@
 package trabalho.server.models;
 
-public class Person {
+public class Pessoa {
     private String cpf;
     private String nome;
     private String endereco;
 
     // Constructors
-    public Person() {}
+    public Pessoa() {}
 
-    public Person(String cpf, String nome, String endereco) {
+    public Pessoa(String cpf, String nome, String endereco) {
         this.setCpf(cpf);
         this.setNome(nome);
         this.setEndereco(endereco);
@@ -20,7 +20,7 @@ public class Person {
 
     private void setCpf(String cpf) {
         if (!isValidCpf(cpf)) {
-            throw new IllegalArgumentException("Invalid CPF format");
+            throw new IllegalArgumentException("Formato de CPF invalido");
         }
         this.cpf = cpf;
     }
@@ -31,7 +31,7 @@ public class Person {
 
     public void setNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome cannot be null or empty");
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
         }
         this.nome = nome;
     }
@@ -42,7 +42,7 @@ public class Person {
 
     public void setEndereco(String endereco) {
         if (endereco == null || endereco.trim().isEmpty()) {
-            throw new IllegalArgumentException("Endereco cannot be null or empty");
+            throw new IllegalArgumentException("Endereco não pode ser nulo ou vazio");
         }
         this.endereco = endereco;
     }

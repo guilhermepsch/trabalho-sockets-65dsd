@@ -1,22 +1,24 @@
 package trabalho.server.repositories;
 
-import trabalho.server.models.Person;
+import trabalho.server.models.Pessoa;
+import trabalho.server.models.Turma;
+import trabalho.server.services.ServiceLocator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonRepository implements Repository<Person> {
+public class PessoaRepository implements Repository<Pessoa> {
 
-    private final List<Person> people = new ArrayList<>();
+    private final List<Pessoa> people = new ArrayList<>();
 
     @Override
-    public void create(Person person) {
+    public void create(Pessoa person) {
         people.add(person);
     }
 
     @Override
-    public Person read(String cpf) {
-        for (Person person : people) {
+    public Pessoa read(String cpf) {
+        for (Pessoa person : people) {
             if (person.getCpf().equals(cpf)) {
                 return person;
             }
@@ -25,7 +27,7 @@ public class PersonRepository implements Repository<Person> {
     }
 
     @Override
-    public void update(Person person) {
+    public void update(Pessoa person) {
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).getCpf().equals(person.getCpf())) {
                 people.set(i, person);
@@ -42,10 +44,17 @@ public class PersonRepository implements Repository<Person> {
                 break;
             }
         }
+        List<Turma> turmas = ServiceLocator.getRepository(Turma.class).listAll();
+        for (Turma turma : turmas) {
+            if (turma.hasPessoa(cpf)) {
+                turma.removePessoa(cpf);
+                ServiceLocator.getRepository(Turma.class).update(turma);
+            }
+        }
     }
 
     @Override
-    public List<Person> listAll() {
+    public List<Pessoa> listAll() {
         return new ArrayList<>(people);
     }
 }

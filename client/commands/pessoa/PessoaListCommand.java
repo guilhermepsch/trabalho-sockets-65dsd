@@ -1,4 +1,4 @@
-package trabalho.client.commands.person;
+package trabalho.client.commands.pessoa;
 
 import trabalho.client.commands.AbstractRequestCommand;
 
@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class DeletePersonCommand extends AbstractRequestCommand {
+public class PessoaListCommand extends AbstractRequestCommand {
     @Override
     public void execute(Socket socket, PrintWriter writer, BufferedReader reader, BufferedReader userInputReader) throws IOException {
-        System.out.println("Enter CPF of the person to delete:");
-        String cpf = userInputReader.readLine();
-        writer.println("DELETE_PERSON;" + cpf);
+        writer.println("LIST_PESSOA");
         super.execute(socket, writer, reader, userInputReader);
     }
 }
