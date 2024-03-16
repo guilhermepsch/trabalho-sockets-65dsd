@@ -1,6 +1,5 @@
 package trabalho.server;
 
-import trabalho.server.controllers.OperationController;
 import trabalho.server.services.Server;
 
 public class App {

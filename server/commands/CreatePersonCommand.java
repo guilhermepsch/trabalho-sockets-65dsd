@@ -1,12 +1,10 @@
-package trabalho.server.strategies;
+package trabalho.server.commands;
 
 import trabalho.server.models.Person;
 import trabalho.server.repositories.Repository;
 import trabalho.server.services.ServiceLocator;
 
-import java.util.List;
-
-public class CreatePersonStrategy implements CrudStrategy<Person> {
+public class CreatePersonCommand implements CrudCommand<Person> {
     @Override
     public String execute(String... args) throws Exception {
         if (args.length != 3) {

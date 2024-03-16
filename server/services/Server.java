@@ -1,7 +1,5 @@
 package trabalho.server.services;
 
-import trabalho.server.controllers.OperationController;
-
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
@@ -48,21 +46,21 @@ public class Server {
                     return;
                 }
                 System.out.println("Message Received (RAW):" + message);
-                writer.println(handleMessage(message));
+                writer.println(handleMessage(message)+"\nEND_OF_MESSAGE");
             } catch (Exception e) {
-                writer.println("Error handling client message: " + e.getMessage());
+                writer.println("Error handling client message: " + e.getMessage()+"\nEND_OF_MESSAGE");
             }
         }
     }
 
     private String handleMessage(String message) throws Exception {
         String[] parts = message.split(";");
-        if (parts.length <= 2) {
+        if (parts.length == 0) {
             throw new IOException("Invalid message format: " + message);
         }
         String operationId = parts[0];
         String[] args = Arrays.copyOfRange(parts, 1, parts.length);
-        return OperationController.handleOperation(operationId, args);
+        return OperationLocator.handleOperation(operationId, args);
     }
 
     private void shutdown() {

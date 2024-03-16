@@ -1,6 +1,6 @@
 package trabalho.client.services;
 
-import trabalho.client.factories.MainMenuCommandFactory;
+import trabalho.client.cli.MainMenuCommandFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;

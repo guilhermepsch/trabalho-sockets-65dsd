@@ -7,16 +7,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class CreatePersonCommand implements Command {
+public class GetPersonCommand implements Command {
     @Override
     public void execute(Socket socket, PrintWriter writer, BufferedReader reader, BufferedReader userInputReader) throws IOException {
-        System.out.println("Enter CPF:");
+        System.out.println("Enter CPF of the person to retrieve:");
         String cpf = userInputReader.readLine();
-        System.out.println("Enter Name:");
-        String name = userInputReader.readLine();
-        System.out.println("Enter Address:");
-        String address = userInputReader.readLine();
-        writer.println("CREATE_PERSON;" + cpf + ";" + name + ";" + address);
+
+        writer.println("GET_PERSON;" + cpf);
+
         String response;
         System.out.println("Server Response:");
         while ((response = reader.readLine()) != null) {
