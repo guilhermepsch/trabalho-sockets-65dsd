@@ -8,9 +8,11 @@ import java.util.Arrays;
 
 public class Server {
     private static final String SHUTDOWN_MESSAGE = "SHUTDOWN";
+    private static Server instance;
     private ServerSocket serverSocket;
 
-    public Server() {}
+    private Server() {
+    }
 
     public void start(int port) {
         try {
@@ -35,34 +37,32 @@ public class Server {
         }
     }
 
-    private void handleClient(Socket socket) {
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-        ) {
-            String message;
-            while ((message = reader.readLine()) != null) {
+    private void handleClient(Socket socket) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+        String message;
+        while ((message = reader.readLine()) != null) {
+            try {
                 if (message.equals(SHUTDOWN_MESSAGE)) {
                     shutdown();
                     return;
-                } else {
-                    handleMessage(message);
                 }
+                System.out.println("Message Received (RAW):" + message);
+                writer.println(handleMessage(message));
+            } catch (Exception e) {
+                writer.println("Error handling client message: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.err.println("Error handling client message: " + e.getMessage());
         }
     }
 
-    private void handleMessage(String message) {
+    private String handleMessage(String message) throws Exception {
         String[] parts = message.split(";");
-        if (parts.length >= 2) {
-            String operationId = parts[0];
-            String[] args = Arrays.copyOfRange(parts, 1, parts.length);
-            OperationController.handleOperation(operationId, args);
-        } else {
-            System.err.println("Invalid message format: " + message);
+        if (parts.length <= 2) {
+            throw new IOException("Invalid message format: " + message);
         }
+        String operationId = parts[0];
+        String[] args = Arrays.copyOfRange(parts, 1, parts.length);
+        return OperationController.handleOperation(operationId, args);
     }
 
     private void shutdown() {
@@ -78,5 +78,12 @@ public class Server {
         } catch (IOException e) {
             System.err.println("Error closing server socket: " + e.getMessage());
         }
+    }
+
+    public static Server getInstance() {
+        if (instance == null) {
+            instance = new Server();
+        }
+        return instance;
     }
 }

@@ -17,15 +17,14 @@ public class OperationController {
     private OperationController() {
     }
 
-    public static void handleOperation(String operationId, String... args) {
+    public static String handleOperation(String operationId, String... args) throws Exception {
         CrudStrategy<?> strategy = routes.get(operationId);
-        if (strategy != null) {
-            @SuppressWarnings("unchecked")
-            CrudStrategy<Object> typedStrategy = (CrudStrategy<Object>) strategy;
-            typedStrategy.execute(null, args);
-        } else {
-            System.err.println("Operation ID not found: " + operationId);
+        if (strategy == null) {
+            return "Operation ID not found: " + operationId;
         }
+        @SuppressWarnings("unchecked")
+        CrudStrategy<Object> typedStrategy = (CrudStrategy<Object>) strategy;
+        return typedStrategy.execute(args);
     }
 
 }
