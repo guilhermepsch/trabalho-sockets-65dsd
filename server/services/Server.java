@@ -5,7 +5,6 @@ import java.net.*;
 import java.util.Arrays;
 
 public class Server {
-    private static final String SHUTDOWN_MESSAGE = "SHUTDOWN";
     private static Server instance;
     private ServerSocket serverSocket;
 
@@ -41,10 +40,6 @@ public class Server {
         String message;
         while ((message = reader.readLine()) != null) {
             try {
-                if (message.equals(SHUTDOWN_MESSAGE)) {
-                    shutdown();
-                    return;
-                }
                 System.out.println("Message Received (RAW):" + message);
                 writer.println(handleMessage(message)+"\nEND_OF_MESSAGE");
             } catch (Exception e) {
