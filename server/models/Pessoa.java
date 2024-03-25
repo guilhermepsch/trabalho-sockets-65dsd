@@ -5,9 +5,6 @@ public class Pessoa {
     private String nome;
     private String endereco;
 
-    // Constructors
-    public Pessoa() {}
-
     public Pessoa(String cpf, String nome, String endereco) {
         this.setCpf(cpf);
         this.setNome(nome);
@@ -49,7 +46,7 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Pessoa{" +
                 "cpf='" + this.getCpf() + '\'' +
                 ", nome='" + this.getNome() + '\'' +
                 ", endereco='" + this.getEndereco() + '\'' +

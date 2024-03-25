@@ -9,8 +9,8 @@ import java.util.List;
 
 public class PessoaRepository implements Repository<Pessoa> {
 
-    private final List<Pessoa> people = new ArrayList<>();
-    private final List<PessoaRepositoryObserver> observers = new ArrayList<>();
+    protected static final List<Pessoa> people = new ArrayList<>();
+    protected final List<PessoaRepositoryObserver> observers = new ArrayList<>();
 
     @Override
     public void create(Pessoa person) {
@@ -62,13 +62,13 @@ public class PessoaRepository implements Repository<Pessoa> {
         observers.remove(observer);
     }
 
-    private void notifyObserversPessoaDeleted(String cpf) {
+    protected void notifyObserversPessoaDeleted(String cpf) {
         for (PessoaRepositoryObserver observer : observers) {
             observer.pessoaDeleted(cpf);
         }
     }
 
-    private void notifyObserversPessoaUpdated(Pessoa pessoa) {
+    protected void notifyObserversPessoaUpdated(Pessoa pessoa) {
         for (PessoaRepositoryObserver observer : observers) {
             observer.pessoaUpdated(pessoa);
         }
