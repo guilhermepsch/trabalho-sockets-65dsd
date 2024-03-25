@@ -10,9 +10,9 @@ public class PessoaCreateCommand implements Command {
     public String execute(BufferedReader userInputReader) throws IOException {
         System.out.println("Inserir CPF:");
         String cpf = userInputReader.readLine();
-        System.out.println("Inserir Name:");
+        System.out.println("Inserir nome:");
         String name = userInputReader.readLine();
-        System.out.println("Inserir endereço Address:");
+        System.out.println("Inserir endereço:");
         String address = userInputReader.readLine();
         return ("CREATE_PESSOA;" + cpf + ";" + name + ";" + address);
     }
